@@ -1,0 +1,7 @@
+﻿@model DemoMVC.Models.AboutModel
+
+@using (Html.BeginForm())
+{
+    <p> Enter your mail:@Html.TextBoxFor(x => x.eMail)</p>
+    <input type="submit" value="Submit">
+}

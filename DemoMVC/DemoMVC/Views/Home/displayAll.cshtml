@@ -1,0 +1,28 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>displayAll</title>
+</head>
+<body>
+    <div> 
+        <table>
+            @foreach (string country in ViewBag.CountryList)
+            {
+
+                <tr>
+                    <td>
+                        @country
+                    </td>
+                </tr>
+            }
+        </table>
+</div>
+</body>
+</html>

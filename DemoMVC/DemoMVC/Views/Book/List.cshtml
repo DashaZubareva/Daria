@@ -1,0 +1,70 @@
+﻿@using DemoMVC.Models;
+@model IEnumerable<DemoMVC.Models.Book>
+
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>List</h2>
+<div style="margin-bottom:20px; padding-bottom:12px;">
+    <span > Search  </span>  
+    <input type="text" id="inputId" onkeyup="identitySearchVal()" value=""/>   
+    <a href="#" id="refId" class="btn btn-primary">Искать</a>      
+    </div>
+
+<div><table border="1" width="500">
+    <tr>
+        <td colspan="3" align="center" style="font-weight:800">Book Name</td>
+    </tr>
+       
+    @foreach (Book book in Model)
+    {
+        <tr>
+            <td width="300" class="bookClazz" bookId="@book.ID">@book.BookName </td>
+            <td width="300">@Html.ActionLink("Edit", "EditBook", "Book", new { bookId= book.ID}, null)</td>
+          <!--  <td width="300"> @Html.ActionLink("Delete", "DeleteBook", "Book", new { bookId = book.ID }, null)</td>-->
+            <td width="300"><a href="#" class="delete-book" bookId="@book.ID">Delete</a></td>
+        </tr>
+    }
+</table>
+    </div>
+<div style="margin-top:20px;">
+    @Html.ActionLink("Add", "AddBook", "Book", null)
+     </div>
+    
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+<script>
+    function identitySearchVal() {      
+        var path = "/Book/SearchBooks?val=";
+        $("#refId").attr("href", path + $("#inputId").val())
+    }
+  /*  $(".bookClazz").click(function(e){
+        var bookId=$(this).attr('bookId');
+        alert ('Book ID is: ' + bookId)
+    })*/
+    $(".delete-book").click(function (e) {     
+        var Id = $(this).attr('bookId');      
+        $.ajax({
+            type: "POST",
+            url: "/Book/DeleteBook",
+            data: { bookId:Id },
+            async: true,
+            success: function (rezult) {
+                switch (rezult) {
+                    case '1': {
+                        alert("Book has been succesfully deleted!");
+                        location.reload();
+                    } break;
+                    case '2': alert("Book has been not deleted!!"); break;
+                    default: alert("bookId is incorrect"); break;
+
+                }           
+              
+            }
+        })
+    })
+    </script>
+
