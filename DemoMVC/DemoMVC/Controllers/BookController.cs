@@ -107,8 +107,7 @@ namespace DemoMVC.Controllers
             }
             else
             {
-                IList<Book> findedBooks = db.bookRepozitory.searchBooks(val);
-                ViewBag.model = findedBooks;
+                IList<Book> findedBooks = db.bookRepozitory.searchBooks(val);             
                 return View(findedBooks);
             }
         }
