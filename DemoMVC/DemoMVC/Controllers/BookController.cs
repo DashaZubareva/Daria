@@ -103,13 +103,15 @@ namespace DemoMVC.Controllers
             if (val == "")
             {
                 ViewBag.message = "Value canot be empty";
+                return RedirectToAction("List");
             }
             else
             {
                 IList<Book> findedBooks = db.bookRepozitory.searchBooks(val);
                 ViewBag.model = findedBooks;
-                return View("SearchBooks", findedBooks);
+                return View(findedBooks);
             }
         }
+
     }
 }
