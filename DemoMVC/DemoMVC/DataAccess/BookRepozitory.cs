@@ -54,7 +54,7 @@ namespace DemoMVC.DataAccess
             IList<Book> findedBooks = new List<Book>();
             foreach (Book bookk in _books)
             {
-                if (bookk.BookName.Contains(names))
+                if (bookk.BookName.IndexOf(names)>0)
                 {
                     findedBooks.Add(bookk);                     
                 }

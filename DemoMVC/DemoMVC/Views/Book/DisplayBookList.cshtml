@@ -1,0 +1,29 @@
+﻿@model IEnumerable<DemoMVC.Models.Book>
+@using DemoMVC.Models;
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table border="1">
+    <tr>
+        <td colspan="6" align="center" style="font-weight:800">Book Name</td>
+    </tr>
+    <tr>
+        <td align="center" style="font-weight:800">Name</td>
+        <td align="center" style="font-weight:800">Author</td>
+        <td align="center" style="font-weight:800">isPrezent</td>
+        <td align="center" style="font-weight:800">Price</td>
+        <td colspan=2 align="center" style="font-weight:800">Action</td>
+    </tr>
+    @foreach (Book book in ViewBag.BookList)
+    {
+        <tr>
+            <td width="300" class="bookClazz" bookId="@book.ID">@book.BookName </td>
+            <td width="300">@book.Author </td>
+            <td width="300">@Html.CheckBox("isPresent", @book.isPrezent) </td>
+            <td width="300">@book.Price </td>
+            <td width="300">@Html.ActionLink("Edit", "EditBook", "Book", new { bookId = book.ID }, null)</td>
+            <td width="300"><a href="#" class="delete-book" bookId="@book.ID">Delete</a></td>
+        </tr>
+    }
+</table>
