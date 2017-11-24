@@ -1,0 +1,2 @@
+D:\aspNet\RepAsp\Daria\BikeStore\BikeStore\obj\Debug\BikeStore.csprojResolveAssemblyReference.cache
+D:\aspNet\RepAsp\Daria\BikeStore\BikeStore\obj\Debug\BikeStore.csproj.CoreCompileInputs.cache

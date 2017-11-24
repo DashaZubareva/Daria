@@ -1,4 +1,5 @@
-﻿using BikeStore.Models;
+﻿using BikeStore.Interfaces;
+using BikeStore.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,9 +7,9 @@ using System.Web;
 
 namespace BikeStore.DataAccess
 {
-    public class BikeRepository
+    public class BikeRepository : IRepozitory
     {
-        private static IList<Bike> bikes;
+        public static IList<Bike> bikes;
         public BikeRepository()
         {
             if (bikes == null)
@@ -16,75 +17,67 @@ namespace BikeStore.DataAccess
         }
         private IList<Bike> init()
         {
-
-            IList<Bike> bookList = new List<Bike>();
-            for (int i = 0; i < 10; i++)
+            IList<Bike> bikeList = new List<Bike>();
+            for (int i = 0; i < 12; i++)
             {
-                bookList.Add(Models.Book.build());
+                bikeList.Add(Bike.build());
             }
-            return bookList;
+            return bikeList;
         }
 
-        public bool delete(int? bookId)
+        public bool delete(int? bikeId)
         {
-            foreach (Bike bookk in _books)
+            foreach (Bike bike in bikes)
             {
-                if (bookk.ID == bookId)
+                if (bike.BikeId == bikeId)
                 {
-                    _books.Remove(bookk);
+                    bikes.Remove(bike);
                     return true;
                 }
             }
             return true;
         }
 
-        public IList<Bike> findAll()
+        public IList<Bike> FindAll()
         {
-            return _books;
+            return bikes;
         }
 
-        public Bike findBook(int bookId)
+        public Bike findBike(int bikeId)
         {
-            return _books.FirstOrDefault(book => book.ID == bookId);
+            return bikes.FirstOrDefault(bike => bike.BikeId == bikeId);
         }
-
-        public IList<v> searchBooks(string names)
+        public IList<Bike> searchBikes(string names)
         {
-            IList<Bike> findedBooks = new List<Bike>();
-            foreach (Bike bookk in _books)
+            IList<Bike> findedBikes = new List<Bike>();
+            foreach (Bike bike in bikes)
             {
-                if (bookk.BookName.IndexOf(names) > 0)
+                if (bike.BikeName.IndexOf(names) > 0)
                 {
-                    findedBooks.Add(bookk);
+                    findedBikes.Add(bike);
                 }
             }
-            return findedBooks;
-
+            return findedBikes;
         }
-
-        public bool update(Bike book)
+        public bool update(Bike bikeForUpdate)
         {
-
-            foreach (Bike bookk in _books)
+            foreach (Bike bike in bikes)
             {
-                if (bookk.ID == book.ID)
+                if (bike.BikeId == bikeForUpdate.BikeId)
                 {
-                    bookk.BookName = book.BookName;
-                    bookk.Author = book.Author;
-                    bookk.Price = book.Price;
-                    bookk.isPrezent = book.isPrezent;
+                    bike.BikeName = bikeForUpdate.BikeName;
+                    bike.BikePrice = bikeForUpdate.BikePrice;
+                    bike.BikeSpeed = bikeForUpdate.BikeSpeed;
+                    bike.BikeWheel = bikeForUpdate.BikeWheel;
                     return true;
                 }
             }
             return false;
-
         }
-        public IList<Bike> addBook(Bike book)
+        public IList<Bike> addBook(Bike bikeToAdd)
         {
-            _books.Add(book);
-            return _books;
-
+            bikes.Add(bikeToAdd);
+            return bikes;
         }
-
     }
 }
