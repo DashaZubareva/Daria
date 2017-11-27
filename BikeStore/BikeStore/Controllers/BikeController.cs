@@ -12,11 +12,11 @@ namespace BikeStore.Controllers
     {
         BikeRepository bk = new BikeRepository();
         // GET: Bike
-        public ActionResult BikeList()
+        public ActionResult BikeList1()
         {
-            ViewBag.bikes = bk.FindAll();
-            IList<Bike> bikes = bk.FindAll();
-            return View();
+            ViewBag.selectList = null;
+            IEnumerable<Bike> bikes = bk.FindAll();
+            return View(bikes);
         }
     }
 }
