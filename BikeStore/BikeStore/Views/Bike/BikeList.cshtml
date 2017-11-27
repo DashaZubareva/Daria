@@ -1,0 +1,38 @@
+﻿@using BikeStore.Enums
+@using BikeStore.Models
+@model IEnumerable<BikeStore.Models.Bike>
+
+@{
+    ViewBag.Title = "BikeList";
+    Layout = "~/Views/Shared/masterPage.cshtml";
+}
+
+<h2>BikeList</h2>
+<div>
+    <select>
+        <option value="@((EnumCategory)1).toString())">@((EnumCategory)1)</option>
+        <option value="@((EnumCategory)2).toString())">@((EnumCategory)2)</option>
+    </select>
+    <table border="1" width="500">
+        <tr>
+            <th>ID</th>
+            <th>Model</th>
+            <th>Wheel</th>
+            <th>Speed</th>
+            <th>Category</th>
+            <th>Price</th>
+        </tr>
+       @foreach (Bike bike in ViewBag.bikes)
+       {
+            <tr>
+               <td>@bike.BikeId</td>            
+                <td>@bike.BikeName</td>
+                <td>@bike.BikeWheel</td>
+                <td>@bike.BikeSpeed</td>
+                <td>@bike.BikeCategory</td>
+                <td>@bike.BikePrice</td>
+            </tr>
+        }
+    </table>
+</div>
+

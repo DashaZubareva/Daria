@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BikeStore.DataAccess;
+using BikeStore.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +10,12 @@ namespace BikeStore.Controllers
 {
     public class BikeController : Controller
     {
+        BikeRepository bk = new BikeRepository();
         // GET: Bike
-        public ActionResult Index()
+        public ActionResult BikeList()
         {
+            ViewBag.bikes = bk.FindAll();
+            IList<Bike> bikes = bk.FindAll();
             return View();
         }
     }

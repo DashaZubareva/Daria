@@ -19,7 +19,7 @@ namespace BikeStore.Models
         private static Random random = new Random();
         public static Bike build()
         {
-            int index = random.Next(1, 100);
+            int index = random.Next(1, 1000);
             int speedVal = random.Next(10, 30);
             int wheellVal = random.Next(3, 14);
             double PriceVal = random.Next(500, 5000);
@@ -28,7 +28,7 @@ namespace BikeStore.Models
             {
                 BikeId = index,
                 BikeName = UtilForBike.ModelsBike[random.Next(0, 12)],
-                BikeCategory = (EnumCategory)(random.Next(1, 2)),
+                BikeCategory = (EnumCategory)(random.Next(1, 3)),
                 BikeWheel = wheellVal,
                 BikeSpeed = speedVal,
                 BikePrice = (decimal)PriceVal

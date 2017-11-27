@@ -18,7 +18,7 @@ namespace BikeStore.DataAccess
         private IList<Bike> init()
         {
             IList<Bike> bikeList = new List<Bike>();
-            for (int i = 0; i < 12; i++)
+            for (int i = 0; i < 22; i++)
             {
                 bikeList.Add(Bike.build());
             }
