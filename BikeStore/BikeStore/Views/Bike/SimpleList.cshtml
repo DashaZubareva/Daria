@@ -1,0 +1,62 @@
+﻿@model IEnumerable<BikeStore.Models.Bike>
+    @using BikeStore.Enums
+
+<p>
+    @{
+        Html.ActionLink("Create New", "Create");
+        Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+    }
+</p>
+
+<select>
+@foreach (var item in ViewBag.category)
+{
+    <option value="item">text</option>
+}
+    @Html.EnumDropDownListFor(
+    x => x.,
+    "Select Category",
+    new { @class = "form-control" })
+</select>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BikeName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BikeWheel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BikeSpeed)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BikePrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BikeCategory)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.BikeName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BikeWheel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BikeSpeed)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BikePrice)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.BikeId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.BikeId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.BikeId })
+        </td>
+    </tr>
+}
+
+</table>

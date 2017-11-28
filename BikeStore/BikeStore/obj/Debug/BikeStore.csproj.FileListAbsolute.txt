@@ -45,3 +45,9 @@ D:\aspNet\RepAsp\Daria\BikeStore\BikeStore\bin\System.Web.Helpers.xml
 D:\aspNet\RepAsp\Daria\BikeStore\BikeStore\bin\System.Web.Mvc.xml
 D:\aspNet\RepAsp\Daria\BikeStore\BikeStore\obj\Debug\BikeStore.dll
 D:\aspNet\RepAsp\Daria\BikeStore\BikeStore\obj\Debug\BikeStore.pdb
+D:\aspNet\RepAsp\Daria\BikeStore\BikeStore\bin\ru\System.Web.Razor.resources.dll
+D:\aspNet\RepAsp\Daria\BikeStore\BikeStore\bin\ru\System.Web.Webpages.resources.dll
+D:\aspNet\RepAsp\Daria\BikeStore\BikeStore\bin\ru\System.Web.Webpages.Deployment.resources.dll
+D:\aspNet\RepAsp\Daria\BikeStore\BikeStore\bin\ru\System.Web.Webpages.Razor.resources.dll
+D:\aspNet\RepAsp\Daria\BikeStore\BikeStore\bin\ru\System.Web.Helpers.resources.dll
+D:\aspNet\RepAsp\Daria\BikeStore\BikeStore\bin\ru\System.Web.Mvc.resources.dll
