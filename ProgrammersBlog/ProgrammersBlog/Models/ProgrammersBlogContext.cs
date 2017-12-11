@@ -12,6 +12,7 @@ namespace ProgrammersBlog.Models
 
         public virtual DbSet <User> User { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
+
         public virtual DbSet<Blog> Blogs { get; set; }
         public virtual DbSet<Comment> Comments { get; set; }
 

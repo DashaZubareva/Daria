@@ -13,7 +13,7 @@ namespace ProgrammersBlog.Controllers
     public class PostsController : Controller
     {
         private ProgrammersBlogContext db = new ProgrammersBlogContext();
-
+      
         // GET: Posts
         public ActionResult Index()
         {
@@ -32,6 +32,8 @@ namespace ProgrammersBlog.Controllers
             {
                 return HttpNotFound();
             }
+            post.Comments = db.Comments.Where(item => item.PostId == id).ToList();
+
             return View(post);
         }
 
@@ -122,6 +124,23 @@ namespace ProgrammersBlog.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        /****Comment Actions*****/
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateComment(int postId, string body, int userId = 1)
+        {
+            if (ModelState.IsValid)
+            {
+                var objcomment = new Comment();
+                objcomment.BodyComments = body;
+                objcomment.UserId = userId;
+                objcomment.PostId = postId;
+                db.Comments.Add(objcomment);
+                db.SaveChanges();
+                return RedirectToAction("Details/" + postId.ToString());
+            }
+            return RedirectToAction("Details/"+ postId.ToString());
         }
     }
 }
