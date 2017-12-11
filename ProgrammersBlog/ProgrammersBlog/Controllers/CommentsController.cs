@@ -6,110 +6,116 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using ProgrammersBlog.Models;
 
-namespace ProgrammersBlog.Models
+namespace ProgrammersBlog.Controllers
 {
-    public class UsersController : Controller
+    public class CommentsController : Controller
     {
         private ProgrammersBlogContext db = new ProgrammersBlogContext();
 
-        // GET: Users
+        // GET: Comments
         public ActionResult Index()
         {
-            return View(db.User.ToList());
+            var comments = db.Comments.Include(c => c.Post);
+            return View(comments.ToList());
         }
 
-        // GET: Users/Details/5
+        // GET: Comments/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.User.Find(id);
-            if (user == null)
+            Comment comment = db.Comments.Find(id);
+            if (comment == null)
             {
                 return HttpNotFound();
             }
-            return View("Index");
+            return View(comment);
         }
 
-        // GET: Users/Create
+        // GET: Comments/Create
         public ActionResult Create()
         {
+            ViewBag.PostId = new SelectList(db.Posts, "PostId", "Title");
             return View();
         }
 
-        // POST: Users/Create
+        // POST: Comments/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UserId,UserName,EMail,Birthday,Avatar,Password")] User user)
+        public ActionResult Create([Bind(Include = "CommentId,BodyComments,UserId,Deleted,PostId")] Comment comment)
         {
             if (ModelState.IsValid)
             {
-                db.User.Add(user);
+                db.Comments.Add(comment);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(user);
+            ViewBag.PostId = new SelectList(db.Posts, "PostId", "Title", comment.PostId);
+            return View(comment);
         }
 
-        // GET: Users/Edit/5
+        // GET: Comments/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.User.Find(id);
-            if (user == null)
+            Comment comment = db.Comments.Find(id);
+            if (comment == null)
             {
                 return HttpNotFound();
             }
-            return View(user);
+            ViewBag.PostId = new SelectList(db.Posts, "PostId", "Title", comment.PostId);
+            return View(comment);
         }
 
-        // POST: Users/Edit/5
+        // POST: Comments/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UserId,UserName,EMail,Birthday,Avatar,Password")] User user)
+        public ActionResult Edit([Bind(Include = "CommentId,BodyComments,UserId,Deleted,PostId")] Comment comment)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(user).State = EntityState.Modified;
+                db.Entry(comment).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(user);
+            ViewBag.PostId = new SelectList(db.Posts, "PostId", "Title", comment.PostId);
+            return View(comment);
         }
 
-        // GET: Users/Delete/5
+        // GET: Comments/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.User.Find(id);
-            if (user == null)
+            Comment comment = db.Comments.Find(id);
+            if (comment == null)
             {
                 return HttpNotFound();
             }
-            return View(user);
+            return View(comment);
         }
 
-        // POST: Users/Delete/5
+        // POST: Comments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            User user = db.User.Find(id);
-            db.User.Remove(user);
+            Comment comment = db.Comments.Find(id);
+            db.Comments.Remove(comment);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

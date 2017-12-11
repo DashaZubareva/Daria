@@ -7,10 +7,11 @@ namespace ProgrammersBlog.Models
 {
     public class Comment
     {
-        public int Id { get; set; }
+        public int CommentId { get; set; }
         public string BodyComments { get; set; }
         public int UserId { get; set; }
         public bool Deleted { get; set; }
         public int PostId { get; set; }
+        public Post Post { get; set; }
     }
 }

@@ -23,7 +23,13 @@ namespace ProgrammersBlog.Models
                 .Map(m => m.ToTable("UsersRoles")
                 .MapLeftKey("UserId")
                 .MapLeftKey("RoleId"));
+
+            modelBuilder.Entity<Comment>()
+               .HasRequired<Post>(e => e.Post)
+               .WithMany(e => e.Comments)
+               .HasForeignKey(e => e.PostId);
         }
 
+        public System.Data.Entity.DbSet<ProgrammersBlog.Models.Post> Posts { get; set; }
     }
 }
