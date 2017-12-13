@@ -1,5 +1,5 @@
 ﻿@model ProgrammersBlog.Models.User
-
+@using ProgrammersBlog.CommonHelpers
 @{
     ViewBag.Title = "Edit";
 }
@@ -44,7 +44,8 @@
         <div class="form-group">
             <input type="file" name="userPhoto" id="userPhoto" width="100px" height="100px"/>  
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Avatar, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.CustomImage(@Model.Avatar, "image", 100, 100)
+                @Html.HiddenFor(model => model.Avatar, new { htmlAttributes = new { @class = "form-control"} })
                 @Html.ValidationMessageFor(model => model.Avatar, "", new { @class = "text-danger" })
             </div>         
         </div>
