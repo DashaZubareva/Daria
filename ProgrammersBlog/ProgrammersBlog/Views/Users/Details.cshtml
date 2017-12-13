@@ -1,4 +1,6 @@
 ﻿@model ProgrammersBlog.Models.User
+    @using ProgrammersBlog.CommonHelpers
+
 
 @{
     ViewBag.Title = "Details";
@@ -38,8 +40,9 @@
             @Html.DisplayNameFor(model => model.Avatar)
         </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Avatar)
+        <dd>           
+            @Html.CustomImage(@Model.Avatar, "image", 100, 100)       
+            
         </dd>
 
         <dt>

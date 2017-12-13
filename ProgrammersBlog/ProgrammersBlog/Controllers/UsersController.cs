@@ -77,7 +77,7 @@ namespace ProgrammersBlog.Models
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UserId,UserName,EMail,Avatar,Birthday,Password")] User user, HttpPostedFileBase userPhoto)
+        public ActionResult Edit([Bind(Include = "UserId,UserName,EMail,Birthday,Avatar,Password")] User user, HttpPostedFileBase userPhoto)
         {
             if (ModelState.IsValid)
             {
