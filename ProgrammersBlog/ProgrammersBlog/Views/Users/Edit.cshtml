@@ -7,7 +7,7 @@
 <h2>Edit</h2>
 
 
-@using (Html.BeginForm("Edit", "User", FormMethod.Post, new { actionName = "/Users/Edit", @enctype = "mulipart/form-data", id = "EditForm", @role="form"}))
+@using (Html.BeginForm("Edit", "Users", FormMethod.Post, new { actionName = "/Users/Edit", @enctype = "multipart/form-data", id = "EditForm", @role="form"}))
 {
     @Html.AntiForgeryToken()
     
@@ -42,7 +42,7 @@
         </div>
 
         <div class="form-group">
-            <input type="file" name="Avatar" id="userPhoto"/>           
+            <input type="file" name="userPhoto" id="userPhoto"/>           
         </div>
 
         <div class="form-group">
