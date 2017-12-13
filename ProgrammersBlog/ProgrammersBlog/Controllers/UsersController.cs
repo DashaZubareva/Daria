@@ -31,7 +31,7 @@ namespace ProgrammersBlog.Models
             {
                 return HttpNotFound();
             }
-            return View("Index");
+            return View(user);
         }
 
         // GET: Users/Create
@@ -77,14 +77,24 @@ namespace ProgrammersBlog.Models
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UserId,UserName,EMail,Birthday,Avatar,Password")] User user)
+        public ActionResult Edit([Bind(Include = "UserId,UserName,EMail,Avatar,Birthday,Password")] User user, HttpPostedFile userPhoto)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(user).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                if (userPhoto != null && userPhoto.ContentLength > 0)
+                {
+                    var avatar = new byte[userPhoto.ContentLength];
+                    userPhoto.InputStream.Read(avatar, 0, userPhoto.ContentLength);
+                    var base64 = Convert.ToBase64String(avatar);
+                    var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
+                    user.Avatar = imgsrc;
+
+                }
+                    db.Entry(user).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+           
             return View(user);
         }
 

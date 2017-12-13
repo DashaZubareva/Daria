@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<ProgrammersBlog.Models.User>
+<add namespace=”CustomHelpers” />
 
 @{
     ViewBag.Title = "Index";
@@ -41,8 +42,9 @@
         <td>
             @Html.DisplayFor(modelItem => item.Birthday)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Avatar)
+        <td>          
+            <img id="userPhoto" name="userPhoto" src="@item.Avatar"/>
+         
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Password)
