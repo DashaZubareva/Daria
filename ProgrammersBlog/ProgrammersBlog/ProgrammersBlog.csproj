@@ -210,6 +210,7 @@
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Permissions.cs" />
     <Compile Include="Models\Post.cs" />
     <Compile Include="Models\ProgrammersBlogContext.cs" />
     <Compile Include="Models\Role.cs" />

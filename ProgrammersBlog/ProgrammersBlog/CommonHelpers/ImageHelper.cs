@@ -17,7 +17,7 @@ namespace ProgrammersBlog.CommonHelpers
             imageTag.MergeAttribute("width", width.ToString());
             imageTag.MergeAttribute("height", height.ToString());
             imageTag.MergeAttribute("class", "img-thumbnail");
-
+            imageTag.GenerateId("idCustomImage");
             return MvcHtmlString.Create(imageTag.ToString(TagRenderMode.SelfClosing));
         }
     }

@@ -8,15 +8,17 @@ namespace ProgrammersBlog.Models
     public class Role
     {
         public int RoleId { get; set; }
-        public int RoleName { get; set; }
-        public int Description { get; set; }
+        public string RoleName { get; set; }
+        public string Description { get; set; }
         public bool Deleted { get; set; }
 
         public ICollection<User> Users { get; set; }
+        public ICollection<Permissions> Permissions { get; set; }
 
         public Role()
         {
             Users = new List<User>();
+            Permissions = new List<Permissions>();
         }
 
     }

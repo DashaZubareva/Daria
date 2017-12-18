@@ -12,7 +12,7 @@ namespace ProgrammersBlog.Models
 
         public virtual DbSet <User> User { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
-
+        public virtual DbSet<Permissions> Permissions { get; set; }
         public virtual DbSet<Blog> Blogs { get; set; }
         public virtual DbSet<Comment> Comments { get; set; }
 
@@ -29,8 +29,15 @@ namespace ProgrammersBlog.Models
                .HasRequired<Post>(e => e.Post)
                .WithMany(e => e.Comments)
                .HasForeignKey(e => e.PostId);
-        }
 
+            modelBuilder.Entity<Permissions>()
+               .HasMany(e => e.Roles)
+               .WithMany(e => e.Permissions)
+               .Map(m => m.ToTable("RolesPermissions")
+               .MapLeftKey("PermissionId")
+               .MapRightKey("RoleId"));
+                
+        }
         public System.Data.Entity.DbSet<ProgrammersBlog.Models.Post> Posts { get; set; }
     }
 }
