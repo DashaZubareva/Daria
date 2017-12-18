@@ -47,6 +47,9 @@
                 @Html.CustomImage(@Model.Avatar, "image", 100, 100)
                 @Html.HiddenFor(model => model.Avatar, new { htmlAttributes = new { @class = "form-control"} })
                 @Html.ValidationMessageFor(model => model.Avatar, "", new { @class = "text-danger" })
+                <div id='preview'>
+                    <img class="img-thumbnail">
+                </div>
             </div>         
         </div>
 
@@ -69,7 +72,25 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+   
+    $("#userPhoto").change(function (e) {
+        var file, reader;
+        file = e.target.files[0];       
+        reader = new FileReader();
+        reader.onload = function (e) {
+            var image;
+            image = new Image();
+            image.src = e.target.result;
+            return image.onload = function () {
+                return $("#preview img").attr('src', this.src);
+            };
+        };
+        return reader.readAsDataURL(file);
+    });
 
+</script>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
