@@ -39,15 +39,21 @@ namespace ProgrammersBlog.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-           
-                Post post = db.Posts.Find(id);
+            var postModel = new PostModel();
+            Post post = db.Posts.Find(id);
             if (post == null)
             {
                 return HttpNotFound();
             }
             post.Comments = db.Comments.Where(item => item.PostId == id).ToList();
 
-            return View(post);
+            foreach (var c in post.Comments)
+            {
+                var comm = AutoMapper.Mapper.Map<Comment, CommentModel>(c);
+                postModel.Comments.Add(comm);
+            }
+            var pm = AutoMapper.Mapper.Map<Post, PostModel>(post);           
+            return View(pm);
         }
 
         // GET: Posts/Create

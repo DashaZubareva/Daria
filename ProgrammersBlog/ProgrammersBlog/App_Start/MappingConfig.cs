@@ -12,9 +12,9 @@ namespace ProgrammersBlog.App_Start
         public static void Configure()
         {
             AutoMapper.Mapper.Initialize(cfg => cfg.CreateMap<Post, PostModel>());
-           // AutoMapper.Mapper.Initialize(cfg => cfg.CreateMap<Blog, BlogModel>());
-           // AutoMapper.Mapper.Initialize(cfg => cfg.CreateMap<User, UserModel>());
-           // AutoMapper.Mapper.Initialize(cfg => cfg.CreateMap<Comment, CommentModel>());
+           AutoMapper.Mapper.Initialize(cfg => cfg.CreateMap<Blog, BlogModel>());
+            AutoMapper.Mapper.Initialize(cfg => cfg.CreateMap<User, UserModel>());
+           AutoMapper.Mapper.Initialize(cfg => cfg.CreateMap<Comment, CommentModel>());
         }
     }
 }
