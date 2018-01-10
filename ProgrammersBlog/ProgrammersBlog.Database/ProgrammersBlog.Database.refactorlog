@@ -28,4 +28,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="[FK_RolesPermissions_ToPermissions]" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="d1321ffa-3bff-4316-88af-206366fcc1b2" ChangeDateTime="12/20/2017 17:19:25">
+    <Property Name="ElementName" Value="[dbo].[UsersRoles].[Role_RoleId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[UsersRoles]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="UserId" />
+  </Operation>
 </Operations>

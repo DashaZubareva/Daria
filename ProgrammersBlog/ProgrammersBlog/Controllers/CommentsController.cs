@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ProgrammersBlog.Models;
+using ProgrammersBlogDomain;
 
 namespace ProgrammersBlog.Controllers
 {
@@ -82,7 +83,7 @@ namespace ProgrammersBlog.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CommentId,BodyComments,UserId,Deleted,PostId")] Comment comment)
+        public ActionResult Edit([Bind(Include = "CommentId,BodyComments,UserId,Deleted,PostId")] CommentModel comment)
         {
             if (ModelState.IsValid)
             {

@@ -5,20 +5,20 @@ using System.Web;
 
 namespace ProgrammersBlog.Models
 {
-    public class Role
+    public class RoleModel
     {
         public int RoleId { get; set; }
         public string RoleName { get; set; }
         public string Description { get; set; }
         public bool Deleted { get; set; }
 
-        public ICollection<User> Users { get; set; }
-        public ICollection<Permissions> Permissions { get; set; }
+        public ICollection<UserModel> Users { get; set; }
+        public ICollection<PermissionsModel> Permissions { get; set; }
 
-        public Role()
+        public RoleModel()
         {
-            Users = new List<User>();
-            Permissions = new List<Permissions>();
+            Users = new List<UserModel>();
+            Permissions = new List<PermissionsModel>();
         }
 
     }

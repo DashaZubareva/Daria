@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace ProgrammersBlog.Models
+namespace ProgrammersBlogDomain
 {
     public class User
     {
@@ -11,9 +12,8 @@ namespace ProgrammersBlog.Models
         public string UserName { get; set; }
         public string EMail { get; set; }
         public DateTime Birthday { get; set; }
-        public string  Avatar { get; set; }
+        public string Avatar { get; set; }
         public string Password { get; set; }
-        bool Deleted { get; set;}
 
         public ICollection<Role> Roles { get; set; }
         public User()

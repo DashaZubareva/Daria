@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProgrammersBlog.App_Start;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,6 +13,8 @@ namespace ProgrammersBlog
     {
         protected void Application_Start()
         {
+            //mapping
+            MappingConfig.Configure();
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

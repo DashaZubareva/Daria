@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ProgrammersBlog.Models;
+using ProgrammersBlogDomain;
 
 namespace ProgrammersBlog.Controllers
 {
@@ -17,7 +18,17 @@ namespace ProgrammersBlog.Controllers
         // GET: Posts
         public ActionResult Index()
         {
-            return View(db.Posts.ToList());
+            var posts = db.Posts.ToList();
+            var postModels = new List<PostModel>();
+
+            foreach (var p in posts)
+            {
+                var pm = AutoMapper.Mapper.Map<Post, PostModel>(p);
+                postModels.Add(pm);
+            }
+
+
+            return View(postModels);
         }
 
         // GET: Posts/Details/5
@@ -27,7 +38,9 @@ namespace ProgrammersBlog.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Post post = db.Posts.Find(id);
+
+           
+                Post post = db.Posts.Find(id);
             if (post == null)
             {
                 return HttpNotFound();
@@ -80,7 +93,7 @@ namespace ProgrammersBlog.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "PostId,Title,Body,Deleted")] Post post)
+        public ActionResult Edit([Bind(Include = "PostId,Title,Body,Deleted")] PostModel post)
         {
             if (ModelState.IsValid)
             {

@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProgrammersBlog.Tests", "Pr
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ProgrammersBlog.Database", "ProgrammersBlog.Database\ProgrammersBlog.Database.sqlproj", "{EEB645A9-AD7C-4E85-B865-83479193514B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProgrammersBlogDomain", "ProgrammersBlogDomain\ProgrammersBlogDomain.csproj", "{7BA7CF54-401C-466E-84C1-48A7C3EFD7AF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{EEB645A9-AD7C-4E85-B865-83479193514B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EEB645A9-AD7C-4E85-B865-83479193514B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EEB645A9-AD7C-4E85-B865-83479193514B}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{7BA7CF54-401C-466E-84C1-48A7C3EFD7AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BA7CF54-401C-466E-84C1-48A7C3EFD7AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BA7CF54-401C-466E-84C1-48A7C3EFD7AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BA7CF54-401C-466E-84C1-48A7C3EFD7AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

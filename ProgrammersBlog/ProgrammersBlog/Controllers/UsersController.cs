@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProgrammersBlogDomain;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -12,11 +13,12 @@ namespace ProgrammersBlog.Models
     public class UsersController : Controller
     {
         private ProgrammersBlogContext db = new ProgrammersBlogContext();
-
+       
+        
         // GET: Users
         public ActionResult Index()
         {
-            return View(db.User.ToList());
+            return View(db.Users.ToList());
         }
 
         // GET: Users/Details/5
@@ -26,7 +28,9 @@ namespace ProgrammersBlog.Models
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.User.Find(id);
+            
+            User user = db.Users.Find(id);           
+          //  user.Roles = db.UsersRoles.Where(item =>item.UserId == id).ToList();
             if (user == null)
             {
                 return HttpNotFound();
@@ -49,7 +53,7 @@ namespace ProgrammersBlog.Models
         {
             if (ModelState.IsValid)
             {
-                db.User.Add(user);
+                db.Users.Add(user);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -64,7 +68,7 @@ namespace ProgrammersBlog.Models
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.User.Find(id);
+            User user = db.Users.Find(id);
             if (user == null)
             {
                 return HttpNotFound();
@@ -77,7 +81,7 @@ namespace ProgrammersBlog.Models
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UserId,UserName,EMail,Birthday,Avatar,Password")] User user, HttpPostedFileBase userPhoto)
+        public ActionResult Edit([Bind(Include = "UserId,UserName,EMail,Birthday,Avatar,Password")] UserModel user, HttpPostedFileBase userPhoto)
         {
             if (ModelState.IsValid)
             {
@@ -105,7 +109,7 @@ namespace ProgrammersBlog.Models
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.User.Find(id);
+            User user = db.Users.Find(id);
             if (user == null)
             {
                 return HttpNotFound();
@@ -118,8 +122,8 @@ namespace ProgrammersBlog.Models
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            User user = db.User.Find(id);
-            db.User.Remove(user);
+            User user = db.Users.Find(id);
+            db.Users.Remove(user);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
