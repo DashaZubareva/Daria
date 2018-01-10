@@ -26,8 +26,6 @@ namespace ProgrammersBlog.Controllers
                 var pm = AutoMapper.Mapper.Map<Post, PostModel>(p);
                 postModels.Add(pm);
             }
-
-
             return View(postModels);
         }
 
@@ -45,13 +43,7 @@ namespace ProgrammersBlog.Controllers
             {
                 return HttpNotFound();
             }
-            post.Comments = db.Comments.Where(item => item.PostId == id).ToList();
-
-            foreach (var c in post.Comments)
-            {
-                var comm = AutoMapper.Mapper.Map<Comment, CommentModel>(c);
-                postModel.Comments.Add(comm);
-            }
+            post.Comments = db.Comments.Where(item => item.PostId == id).ToList();            
             var pm = AutoMapper.Mapper.Map<Post, PostModel>(post);           
             return View(pm);
         }
@@ -67,8 +59,9 @@ namespace ProgrammersBlog.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PostId,Title,Body,Deleted")] Post post)
+        public ActionResult Create([Bind(Include = "PostId,Title,Body,Deleted")] PostModel postModel)
         {
+            var post = AutoMapper.Mapper.Map<PostModel, Post>(postModel) as Post;
             if (ModelState.IsValid)
             {
                 db.Posts.Add(post);

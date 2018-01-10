@@ -12,6 +12,7 @@ namespace ProgrammersBlog.Models
         public string Title { get; set; }
         public string Body { get; set; }
         public bool Deleted { get; set; }
+        public int UserId { get; set; }
         public ICollection<CommentModel> Comments{ get; set; }
         public PostModel()
         {
