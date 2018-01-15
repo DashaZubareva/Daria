@@ -18,7 +18,15 @@ namespace ProgrammersBlog.Models
         // GET: Users
         public ActionResult Index()
         {
-            return View(db.Users.ToList());
+            var users = db.Users.ToList();
+            var userModels = new List<UserModel>();
+            foreach(var user in users)
+            {
+                var tempUser = AutoMapper.Mapper.Map<User, UserModel>(user);
+                userModels.Add(tempUser);
+            }
+                
+            return View(userModels);
         }
 
         // GET: Users/Details/5
