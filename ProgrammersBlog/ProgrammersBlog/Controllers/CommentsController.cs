@@ -19,7 +19,13 @@ namespace ProgrammersBlog.Controllers
         public ActionResult Index()
         {
             var comments = db.Comments.Include(c => c.Post);
-            return View(comments.ToList());
+            var commentsModel = new List<CommentModel>();
+            foreach (var c in comments)
+            {
+                commentsModel.Add(AutoMapper.Mapper.Map<Comment, CommentModel>(c));
+            }
+                
+            return View(commentsModel.ToList());
         }
 
         // GET: Comments/Details/5
