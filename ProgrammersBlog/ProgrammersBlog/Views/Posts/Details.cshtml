@@ -37,68 +37,9 @@
     </dl>
 </div>
 <fieldset>
-    <legend> Comments </legend>
-    <table class="table">
-        <tr>
-            <th>
-                Body
-            </th>
-            <th>
-                User
-            </th>         
-        </tr>
-
-        @foreach (var item in Model.Comments)
-        {
-            <tr>
-                 <td>
-                    @Html.DisplayFor(modelitem => item.BodyComments)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelitem => item.UserId)
-                </td>
-               </tr>
-        }
-            </table>
+    @Html.Partial("_PostComments", Model)
    
-    <h2> Add new Comment</h2>
-    @using (Html.BeginForm("CreateComment", "Posts", FormMethod.Post))
-    {
-        @Html.AntiForgeryToken()
-
-        <div class="form-horizontal">
-            <h4>Comment</h4>
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="form-group">
-                @Html.LabelFor(model => Model.PostId, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.PostId, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.PostId, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label>Comment:</label>
-                @Html.LabelFor(model => model.Body, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <input type="text" id="body" name="body" />                   
-                </div>
-            </div>          
-            <div class="form-group">
-                @Html.Hidden("postId", Model.PostId)
-                @Html.LabelFor(model => model.PostId, "PostId", htmlAttributes: new { @class = "control-label col-md-2" })
-               
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
-                </div>
-            </div>
-        </div>
-    }
-
+   @Html.Partial("_AddComment", Model)
 
 </fieldset>
 

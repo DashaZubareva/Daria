@@ -37,13 +37,12 @@ namespace ProgrammersBlog.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var postModel = new PostModel();
-            Post post = db.Posts.Find(id);
+            Post post = db.Posts.Include(p => p.Comments).Single(p=>p.PostId==id);
             if (post == null)
             {
                 return HttpNotFound();
             }
-            post.Comments = db.Comments.Where(item => item.PostId == id).ToList();            
+          //  post.Comments = db.Comments.Where(item => item.PostId == id).ToList();            
             var pm = AutoMapper.Mapper.Map<Post, PostModel>(post);           
             return View(pm);
         }
@@ -140,19 +139,18 @@ namespace ProgrammersBlog.Controllers
         /****Comment Actions*****/
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateComment(int postId, string body, int userId = 1)
+        public ActionResult CreateComment(int postId, string commentBody, int userId = 1)
         {
+            Post post = db.Posts.Include(p => p.Comments).Single(p =>p.PostId == postId);
             if (ModelState.IsValid)
             {
-                var objcomment = new Comment();
-                objcomment.BodyComments = body;
-                objcomment.UserId = userId;
-                objcomment.PostId = postId;
-                db.Comments.Add(objcomment);
+                post.Comments.Add(new Comment { PostId = postId, UserId = userId, BodyComments = commentBody });
                 db.SaveChanges();
-                return RedirectToAction("Details/" + postId.ToString());
             }
-            return RedirectToAction("Details/"+ postId.ToString());
+            PostModel postModel = AutoMapper.Mapper.Map<Post, PostModel>(post);
+          //  return RedirectToAction("Details/"+ postId.ToString());
+
+            return PartialView("_PostComments", postModel);
         }
     }
 }

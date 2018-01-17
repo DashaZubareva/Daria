@@ -1,0 +1,29 @@
+﻿@model ProgrammersBlog.Models.PostModel
+
+<div id="PostCommentsTable">
+<h2>Comments</h2>
+    <table class="table">
+        <tr>
+            <th>
+                Body
+            </th>
+            <th>
+                User
+            </th>
+        </tr>
+
+        @foreach (var item in Model.Comments)
+        {
+            <tr>
+                 <td>
+                    @Html.DisplayFor(modelitem => item.BodyComments)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelitem => item.UserId)
+                </td>
+               </tr>
+        }
+            </table>
+
+
+</div> 
