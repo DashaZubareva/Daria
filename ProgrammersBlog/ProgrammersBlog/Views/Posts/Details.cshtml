@@ -6,42 +6,31 @@
 
 <h2>Details</h2>
 
-<div>
-    <h4>Post</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Body)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Body)
-        </dd>
+<div id="w">
+    <div class="content">
+        <div class="main">
+            <h1>@Html.DisplayFor(model => model.Title)</h1>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Deleted)
-        </dt>
+            @Html.Raw(Model.Body)
 
-        <dd>
-            @Html.DisplayFor(model => model.Deleted)
-        </dd>
+        </div>
+    </div>
 
-    </dl>
-</div>
-<fieldset>
     @Html.Partial("_PostComments", Model)
-   
-   @Html.Partial("_AddComment", Model)
 
-</fieldset>
+    <br />
+
+    @Html.Partial("_AddComment", Model)
+
+
+
+</div>
+
+
+
 
 
 <p>

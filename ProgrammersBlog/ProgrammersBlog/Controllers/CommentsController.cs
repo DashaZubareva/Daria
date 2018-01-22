@@ -113,7 +113,11 @@ namespace ProgrammersBlog.Controllers
             {
                 return HttpNotFound();
             }
-            return View(comment);
+
+            CommentModel commentModel= new CommentModel();
+            commentModel = AutoMapper.Mapper.Map<Comment, CommentModel>(comment);
+
+            return View(commentModel);
         }
 
         // POST: Comments/Delete/5
@@ -122,6 +126,7 @@ namespace ProgrammersBlog.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Comment comment = db.Comments.Find(id);
+
             db.Comments.Remove(comment);
             db.SaveChanges();
             return RedirectToAction("Index");
