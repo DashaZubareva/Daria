@@ -21,7 +21,7 @@ namespace ProgrammersBlog.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            // Database.SetInitializer<ProgrammersBlogContext>(null);
+             Database.SetInitializer<ProgrammersBlogContext>(null);
 
             //modelBuilder.Entity<User>()
             //    .HasMany(e => e.Roles)

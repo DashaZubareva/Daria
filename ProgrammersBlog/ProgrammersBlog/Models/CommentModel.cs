@@ -12,6 +12,12 @@ namespace ProgrammersBlog.Models
         public int UserId { get; set; }
         public bool Deleted { get; set; }
         public int PostId { get; set; }
+        public int ParentCommId { get; set; }
+        public DateTimeOffset InitialTime { get; set; }
+
         public PostModel Post { get; set; }
+        
+
+
     }
 }
