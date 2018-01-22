@@ -3,43 +3,14 @@
 @{
     ViewBag.Title = "Details";
 }
-
-
-<fieldset>
-      
-    <h2> Add new Comment</h2>
-   
-
-        <div class="form-horizontal">
-           
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-          
-            <div class="form-group">
-                             
-                <div class="col-md-10">
-                    <textarea id="body" name="body" cols="50" rows="4"></textarea> 
-                </div>
-            </div>          
-            <div class="form-group">
-                @Html.Hidden("postId", Model.PostId)
-                           
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input id="addCommentButton" type="submit" value="Create" class="btn btn-default" />
-                </div>
-            </div>
-        </div>
-   
-    <script type="text/javascript">
+<script type="text/javascript">
        $(document).ready(function() {
            var submit = $('#addCommentButton').click(function () {
                var _postId = $('#postId').val();
                var _commentBody = $('#body').val();
-               
+               console.log(_postId);
                $.ajax({
-                   url: "/Post/CreateComment",
+                   url: "/Posts/CreateComment",
                    type: "POST",
                    data: {
                        postId: _postId,
@@ -52,8 +23,33 @@
                })
            });
         });
-    </script>
+</script>
+
+    <h2> Add new Comment</h2>
    
-</fieldset>
+
+        <div class="form-horizontal">
+           
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+          
+            <div class="form-group">
+                  @Html.Hidden("postId", Model.PostId)           
+                <div class="col-md-10">
+                    <textarea id="body" name="body" cols="50" rows="4" width="100%"></textarea> 
+                </div>
+            </div>          
+            <div class="form-group">
+                @Html.Hidden("postId", Model.PostId)
+                           
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input id="addCommentButton" name="addCommentButton" type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+   
+ 
 
 

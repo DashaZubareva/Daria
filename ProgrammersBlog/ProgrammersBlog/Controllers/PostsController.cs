@@ -138,8 +138,8 @@ namespace ProgrammersBlog.Controllers
         }
         /****Comment Actions*****/
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult CreateComment(int postId, string commentBody, int userId = 1)
+       
+        public PartialViewResult CreateComment(int postId, string commentBody, int userId = 1)
         {
             Post post = db.Posts.Include(p => p.Comments).Single(p =>p.PostId == postId);
             if (ModelState.IsValid)
