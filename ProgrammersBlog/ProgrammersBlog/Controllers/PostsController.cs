@@ -60,7 +60,7 @@ namespace ProgrammersBlog.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "PostId,Title,Body,Deleted")] PostModel postModel)
         {
-            var post = AutoMapper.Mapper.Map<PostModel, Post>(postModel) as Post;
+            var post = AutoMapper.Mapper.Map<PostModel, Post>(postModel);
             if (ModelState.IsValid)
             {
                 db.Posts.Add(post);

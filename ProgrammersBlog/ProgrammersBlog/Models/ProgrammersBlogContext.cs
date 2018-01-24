@@ -35,9 +35,6 @@ namespace ProgrammersBlog.Models
                .WithMany(e => e.Comments)
                .HasForeignKey(e => e.PostId);
 
-            //modelBuilder.Entity<Role>()
-            // .HasRequired<User>(e => e.User)
-            // .WithMany(e => e.Roles);
 
             modelBuilder.Entity<Permissions>()
                .HasMany(e => e.Roles)
@@ -46,6 +43,26 @@ namespace ProgrammersBlog.Models
                .MapLeftKey("PermissionId")
                .MapRightKey("RoleId"));
 
+
+         /*  modelBuilder.Entity<Role>()
+                .HasMany<Permissions>(role => role.Permissions)
+                .WithMany(permission => permission.Roles)
+                .Map(rolePermission =>
+                {
+                    rolePermission.MapLeftKey("RoleId");
+                    rolePermission.MapRightKey("PermissionId");
+                    rolePermission.ToTable("Role_Permission");
+                });*/
+
+            modelBuilder.Entity<User>()
+                .HasMany<Role>(user => user.Roles)
+                .WithMany(role => role.Users)
+                .Map(userRole =>
+                {
+                    userRole.MapLeftKey("User_UserId");
+                    userRole.MapRightKey("Role_RoleId");
+                    userRole.ToTable("UserRoles");
+                });
         }
        
     }

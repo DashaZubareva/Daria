@@ -52,21 +52,21 @@ namespace ProgrammersBlog.Models
             return View();
         }
 
-        // POST: Users/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Users/Create        
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UserId,UserName,EMail,Birthday,Avatar,Password")] User user)
+        public ActionResult Create([Bind(Include = "UserId,UserName,EMail,Birthday,Avatar,Password")] UserModel userModel)
         {
             if (ModelState.IsValid)
             {
+                User user = new User();
+                user = AutoMapper.Mapper.Map<UserModel, User>(userModel);
                 db.Users.Add(user);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(user);
+            return View(userModel);
         }
 
         // GET: Users/Edit/5
@@ -76,20 +76,18 @@ namespace ProgrammersBlog.Models
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            User user = db.Users.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            return View(user);
+
+            User user = db.Users.Include(p => p.Roles).Single(p => p.UserId == id);
+
+            var muser = AutoMapper.Mapper.Map<User, UserModel>(user);
+
+            return View(muser);
         }
 
-        // POST: Users/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Users/Edit/5      
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UserId,UserName,EMail,Birthday,Avatar,Password")] UserModel user, HttpPostedFileBase userPhoto)
+        public ActionResult Edit([Bind(Include = "UserId,UserName,EMail,Birthday,Avatar,Password")] UserModel userModel, HttpPostedFileBase userPhoto)
         {
             if (ModelState.IsValid)
             {
@@ -99,15 +97,17 @@ namespace ProgrammersBlog.Models
                     userPhoto.InputStream.Read(avatar, 0, userPhoto.ContentLength);
                     var base64 = Convert.ToBase64String(avatar);
                     var imgsrc = string.Format("data:image/jpg;base64,{0}", base64);
-                    user.Avatar = imgsrc;
+                    userModel.Avatar = imgsrc;
 
                 }
-                    db.Entry(user).State = EntityState.Modified;
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
-           
-            return View(user);
+                User user = new User();
+                user = AutoMapper.Mapper.Map<UserModel, User>(userModel);
+                db.Entry(user).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View();
         }
 
         // GET: Users/Delete/5
